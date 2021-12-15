@@ -1,0 +1,142 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.container{
+    align-self: center;
+    width: 1366px;
+    height: 913px;
+    background: #F4FAFF;
+    border-radius: 25px;
+}
+
+
+.customNav {
+  margin-left: auto;
+  margin-right: initial !important;
+  align-items: center;
+}
+.customNav a {
+  padding-right: 1.5rem !important;
+  padding-left: 1.5rem !important;
+  color: #333333;
+  
+   font-weight: bolder;
+}
+
+.container nav{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+    color: #333333;
+    padding: 2rem;
+    padding-bottom: 4px;
+}
+
+.container nav .left a{
+position: absolute;
+width: 403px;
+height: 49px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: 900;
+font-size: 40px;
+line-height: 49px;
+
+}
+
+.container nav .left span{
+color: #E60079;
+}
+
+.container nav .right a{
+justify-content: space-around;
+width: 43px;
+height: 34px;
+font-family: Montserrat;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 34px;
+/* identical to box height, or 212% */
+text-align: center;
+color: #333333;
+}
+
+.container .main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.container .main .main-left {
+    display: flex;
+    flex-direction: column;
+}
+.container .main .main-left img{
+width: 601.78px;
+height: 353.93px;
+}
+
+.container .main .main-left a{
+width: 436px;
+height: 47px;
+font-family: Gotham Rounded;
+font-style: normal;
+font-weight: bold;
+font-size: 40px;
+line-height: 48px;
+color: #000000;
+}
+
+.container .main .main-right{
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+width: 592px;
+height: 559px;
+background: #FFFFFF;
+box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.03);
+border-radius: 6px;
+}
+.container .main .main-right .one{
+width: 461px;
+height: 94px;
+
+background: #FFFFFF;
+box-shadow: 0px 3px 90px rgba(0, 0, 0, 0.1);
+border-radius: 5px;
+}
+.container .main .main-right .three{
+    width: 461px;
+    height: 94px;
+    background: #FFFFFF;
+    box-shadow: 0px 3px 90px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.container .main .main-right .four{
+width: 461px;
+height: 81px;
+background: #E60079;
+border-radius: 5px;
+}
+
+.convert{
+  color: #FFFFFF;
+  text-align: center;
+  justify-content: space-between;
+  background-color: black;
+  position: absolute;
+width: 114px;
+height: 34px;
+
+font-family: Gotham;
+font-style: normal;
+font-weight: 900;
+font-size: 28px;
+line-height: 34px;
+}
