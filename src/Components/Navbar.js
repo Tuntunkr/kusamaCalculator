@@ -6,30 +6,26 @@ import { useEffect, useState } from "react";
 import { useInterval } from "../utils/Hooks";
 import countries from "../utils/Countries.json";
 import { HiSwitchHorizontal } from "react-icons/hi";
-
+import CurrencyConverter from "./CurrencyConverter";
 
 const coinOptions = [
 	{ value: "polkadot", label: "Polkadot" },
 	{ value: "kusama", label: "Kusama" },
 ];
 
-
 function Navbar() {
 	const [currency, setCurrency] = useState("");
 	const [coinId, setCoinId] = useState("");
-	
+
 	const [price, setPrice] = useState("");
-	
+
 	const [tCoun, setTCoun] = useState(0);
 
-	
 	const [from, setFrom] = useState("usd");
 	const [to, setTo] = useState("inr");
-
-
-	useEffect(() => {
-		setTCoun(price * coinId);
-	}, [coinId]);
+	const [selectedCrypto, setSelectedCrypto] = useState("polkadot");
+	const [selectedFiat, setSelectedFiat] = useState("usd");
+	console.log("selected crypto", selectedCrypto, selectedFiat);
 
 	// const getCountries = async () => {
 	// 	const res = await axios.get(
@@ -46,25 +42,36 @@ function Navbar() {
 		setTo(temp);
 	}
 
-	const kusamaPrice = async () => {
-		const res = await axios.get(
-			`http://localhost:5000/?coinId=kusama&currency=usd`
-		);
-		const data = res.data.kusama.usd;
-		console.log(data);
-		setPrice(data);
-		console.log("called price", data);
+	const fetchCurrencyPrice = async (currency, fiat) => {
+		try {
+			const res = await axios.get(
+				`http://localhost:5000/?coinId=${currency}&currency=${fiat.toLowerCase()}`
+			);
+			const data = res.data[currency];
+			console.log(data);
+			setPrice(data[fiat.toLowerCase()]);
+			console.log("called price", data);
+		} catch (e) {
+			console.log(e, e.message);
+		}
 	};
 
 	useEffect(() => {
 		// getCountries();
 		// getCurrency();
-		kusamaPrice();
-	}, []);
+		if (
+			selectedCrypto &&
+			selectedCrypto.length &&
+			selectedFiat &&
+			selectedFiat.length
+		) {
+			fetchCurrencyPrice(selectedCrypto, selectedFiat);
+		}
+	}, [selectedCrypto, selectedFiat]);
 
-	useInterval(() => {
-		kusamaPrice();
-	}, 20000);
+	// useInterval(() => {
+	// 	fetchCurrencyPrice();
+	// }, 20000);
 
 	return (
 		<>
@@ -86,11 +93,25 @@ function Navbar() {
 					<div className="main-left">
 						<img src="./img.jpeg" alt="" />
 						<br></br>
-						<a>1 Kusama = ${price}</a>
+						<a>
+							1 {selectedCrypto} ={" "}
+							{
+								countries.filter(
+									(item) =>
+										item.currency.code ===
+										selectedFiat.toUpperCase()
+								)[0].currency.symbol
+							}
+							{price}
+						</a>
 					</div>
 
 					<div className="main-right">
-						<Select options={coinOptions} />
+						<h1>Choose Your Currency </h1>
+						<Select
+							options={coinOptions}
+							onChange={(item) => setSelectedCrypto(item.value)}
+						/>
 						{/* <CustomSelect /> */}
 						{/* text box */}
 						<div className="flex flex-col space-y-2 ">
@@ -105,17 +126,17 @@ function Navbar() {
 							/>
 						</div>
 						<div className="flex flex-col space-y-2 ">
-							<label htmlFor="inr">{currency}</label>
+							<label htmlFor="inr">{selectedFiat}</label>
 							<input
 								className="bg-gray-700 text-gray-50 border border-gray-50 outline-none"
 								type="text"
+								contentEditable={false}
 								name="currency"
-								value={tCoun}
-								onChange={(e) => setTCoun(e.target.value)}
+								value={coinId * price || 0}
 								id="inr"
 							/>
 						</div>
-
+						{/* <CurrencyConverter/> */}
 						<div className="switch">
 							<HiSwitchHorizontal
 								size="30px"
@@ -129,6 +150,7 @@ function Navbar() {
 								value: item.currency.code,
 								label: `${item.currency.code} - ${item.currency.name}`,
 							}))}
+							onChange={(option) => setSelectedFiat(option.value)}
 						/>
 
 						<div className="four">
