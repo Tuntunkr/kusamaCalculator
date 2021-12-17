@@ -5,21 +5,27 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useInterval } from "../utils/Hooks";
 import countries from "../utils/Countries.json";
+import { HiSwitchHorizontal } from "react-icons/hi";
+
 
 const coinOptions = [
 	{ value: "polkadot", label: "Polkadot" },
 	{ value: "kusama", label: "Kusama" },
 ];
 
+
 function Navbar() {
 	const [currency, setCurrency] = useState("");
 	const [coinId, setCoinId] = useState("");
-	const [countryData, setCountryData] = useState([{ name: "", flag: "" }]);
+	
 	const [price, setPrice] = useState("");
-	const [prices, setPrices] = useState("");
+	
 	const [tCoun, setTCoun] = useState(0);
-	const [refresh, setRefresh] = useState("");
-	const [country, setCountry] = useState("");
+
+	
+	const [from, setFrom] = useState("usd");
+	const [to, setTo] = useState("inr");
+
 
 	useEffect(() => {
 		setTCoun(price * coinId);
@@ -33,6 +39,12 @@ function Navbar() {
 	// 	const data = res.data.data;
 	// 	setCountryData(data);
 	// };
+	// Function to switch between two currency
+	function flip() {
+		var temp = from;
+		setFrom(to);
+		setTo(temp);
+	}
 
 	const kusamaPrice = async () => {
 		const res = await axios.get(
@@ -79,13 +91,46 @@ function Navbar() {
 
 					<div className="main-right">
 						<Select options={coinOptions} />
+						{/* <CustomSelect /> */}
+						{/* text box */}
+						<div className="flex flex-col space-y-2 ">
+							<label htmlFor="kusama"></label>
+							<input
+								className="bg-gray-700 text-gray-50 py-1 px-2 border border-gray-50 outline-none"
+								type="text"
+								name="kusama"
+								value={coinId}
+								onChange={(e) => setCoinId(e.target.value)}
+								id="kusama"
+							/>
+						</div>
+						<div className="flex flex-col space-y-2 ">
+							<label htmlFor="inr">{currency}</label>
+							<input
+								className="bg-gray-700 text-gray-50 border border-gray-50 outline-none"
+								type="text"
+								name="currency"
+								value={tCoun}
+								onChange={(e) => setTCoun(e.target.value)}
+								id="inr"
+							/>
+						</div>
 
+						<div className="switch">
+							<HiSwitchHorizontal
+								size="30px"
+								onClick={() => {
+									flip();
+								}}
+							/>
+						</div>
 						<Select
 							options={countries.map((item) => ({
 								value: item.currency.code,
 								label: `${item.currency.code} - ${item.currency.name}`,
 							}))}
 						/>
+
 						<div className="four">
 							<button className="convert">Convert</button>
 						</div>
