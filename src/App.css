@@ -117,3 +117,28 @@ body {
   font-weight: bold;
   line-height: 34px;
 }
+
+@media screen and (max-width: 600px){
+  .logo {
+    font-size: 20px;
+  }
+  .imgBlock{
+    display: none;
+  }
+
+  .inputContainer{
+    grid-template-columns: 40% 60%;
+  }
+
+  .inputContainer .css-1hb7zxy-IndicatorsContainer{
+    padding: 0;
+  }
+
+  .customCard{
+    padding: 10px;
+  }
+
+  .currencyDisplay{
+    font-size: 20px;
+  }
+}
