@@ -1,11 +1,68 @@
-import React from 'react'
+import React from "react";
+import { Container } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
 function About() {
-    return (
-        <div>
-            <h1>hello about page</h1>
-        </div>
-    )
+  return (
+    <>
+      <Container>
+        <Row>
+          <div className="customCard about">
+            <h1>About kusama Calculator:</h1>
+            <p>
+              KusamCalculator.com has a simple aim: To satisfy your Cardano
+              Kusama cryptocurrency calculation needs whilst providing a clean
+              design and user experience. The site is a work in progress built
+              to serve the Cardano community. We aim to continue adding new,
+              useful features to the calculators in the future, so don't forget
+              to check back soon!
+            </p>
+            <div>
+              <h6>
+                The current incarnation of the site includes two calculators:
+              </h6>
+              <p>1. Kusama Price Conversion Calculator</p>
+              <p>2. Cardano Kusama Staking Calculator</p>
+            </div>
+
+            <div>
+              <h5>1) Price Conversion Calculator</h5>
+              <p>
+                Displays the latest price of Kusama supporting convertions from
+                Kusama into Fiat or other Crytpocurrencies such as Bitcoin and
+                Ethereum. The price calculator pulls the price data from the
+                public CoinGecko.com API every 4 seconds keeping you up to date.
+              </p>
+
+              <h5>2) Cardano Kusama Staking Calculator</h5>
+              <p>
+                The Cardano project has yet to announce the offical
+                specification and formulas which will be used to calculate
+                Kusama staking rewards. The calculator we currently present is
+                therefore a demonstrative/educational calculator only, which
+                fills in the currently unknown with sensible default parameter
+                values aiming to provide a decent attempt at what kusama rewards
+                one could possibly expect. Once Cardano release the final
+                details regarding how staking works, we will update the staking
+                calculator to reflect the final formula, providing greater
+                accuracy. The calculator, features, and formula used was heavily
+                inpired by the work from Emergo employee and
+              </p>
+
+              <h5>How the site works:</h5>
+              <p>
+                None of the data you enter on any of the calculators ever leaves
+                your computer as all calculations are performed on the client
+                side (inside your browser). The persistant state of what you
+                have entered is stored using the browsers 'localStorage' which
+                is only available to your machine and not to us.
+              </p>
+            </div>
+          </div>
+        </Row>
+      </Container>
+    </>
+  );
 }
 
-export default About
+export default About;

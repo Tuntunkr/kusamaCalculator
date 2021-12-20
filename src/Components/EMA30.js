@@ -1,11 +1,22 @@
-import React from 'react'
+import React from "react";
+import { Container } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
 function EMA30() {
-    return (
-        <div>
-           <h1>Welcome to EMA30 pages</h1> 
+  return (
+    <Container>
+      <Row>
+        <div className="customCard about">
+          {" "}
+          <section>
+            <div>
+              <h3 className="text-center ">COMING SOON</h3>
+            </div>
+          </section>
         </div>
-    )
+      </Row>
+    </Container>
+  );
 }
 
-export default EMA30
+export default EMA30;
