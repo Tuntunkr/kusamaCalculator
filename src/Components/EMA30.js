@@ -7,7 +7,6 @@ function EMA30() {
     <Container>
       <Row>
         <div className="customCard about">
-          {" "}
           <section>
             <div>
               <h3 className="text-center ">COMING SOON</h3>

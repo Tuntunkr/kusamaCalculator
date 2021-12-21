@@ -62,20 +62,6 @@ function Home() {
               <div className="imgBlock">
                 <img src="./money-img.png" alt="" width="100%" />
               </div>
-              <br></br>
-	      <br></br>
-		<a>
-							1 {selectedCrypto} =
-							{
-								countries.filter(
-									(item) =>
-										item.currency.code ===
-										selectedFiat.toUpperCase()
-								)[0].currency.symbol
-							}
-							{price}
-						</a>
-							
             </Col>
 
             <Col md={6}>
@@ -136,6 +122,9 @@ function Home() {
                     {/* {price} */}
                     {coinId * price || 0}
                   </span>
+                  <p>
+                    <small className="text-muted">1 Kusama=${price}</small>
+                  </p>
                 </div>
               </div>
             </Col>
