@@ -62,6 +62,11 @@ function Home() {
               <div className="imgBlock">
                 <img src="./money-img.png" alt="" width="100%" />
               </div>
+              <br></br>
+							<br></br>
+							<div>
+								<h1>1 Kusama=${price}</h1>
+							</div>
             </Col>
 
             <Col md={6}>
