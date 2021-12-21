@@ -63,10 +63,19 @@ function Home() {
                 <img src="./money-img.png" alt="" width="100%" />
               </div>
               <br></br>
-							<br></br>
-							<div>
-								<h1>1 Kusama=${price}</h1>
-							</div>
+	      <br></br>
+		<a>
+							1 {selectedCrypto} =
+							{
+								countries.filter(
+									(item) =>
+										item.currency.code ===
+										selectedFiat.toUpperCase()
+								)[0].currency.symbol
+							}
+							{price}
+						</a>
+							
             </Col>
 
             <Col md={6}>
