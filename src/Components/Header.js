@@ -12,7 +12,7 @@ function Header() {
       <Navbar expand="lg">
         <Container>
           <Navbar.Brand href="/" className="logo">
-            Kusama <span>calculator</span>
+            Dot calculator
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" className="customNav">

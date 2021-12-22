@@ -6,7 +6,6 @@
 
 body {
   font-family: "Montserrat", sans-serif;
-  background-color: #f4faff;
 }
 
 .navbar-nav {
@@ -40,7 +39,7 @@ body {
 
 .customCard {
   background: #ffffff;
-  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.03);
+  box-shadow: 0px 3px 90px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
   padding: 50px;
 }
