@@ -109,7 +109,7 @@ function Home() {
 										/>
 									</div>
 
-<<<<<<< HEAD
+
 									<div>
 										<Select
 											options={countries.map((item) => ({
@@ -160,41 +160,8 @@ function Home() {
 			</div>
 		</>
 	);
-=======
-                  <div>
-                    <Select
-                      options={countries.map((item) => ({
-                        value: item.currency.code,
-                        label: `${item.currency.code} - ${item.currency.name}`,
-                      }))}
-                      onChange={(option) => setSelectedFiat(option.value)}
-                    />
-                  </div>
-                </div>
-                <div className="text-center">
-                  <span className="currencyDisplay">
-                    {coinId} {selectedCrypto} ={" "}
-                    {
-                      countries.filter(
-                        (item) =>
-                          item.currency.code === selectedFiat.toUpperCase()
-                      )[0].currency.symbol
-                    }
-                    {/* {price} */}
-                    {coinId * price || 0}
-                  </span>
-                  <p>
-                    <small className="text-muted">1 Kusama=${price}</small>
-                  </p>
-                </div>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    </>
-  );
->>>>>>> 0345055f5e6f86b2a176c684ce426e4de5f46d2f
+
+
 }
 
 export default Home;
