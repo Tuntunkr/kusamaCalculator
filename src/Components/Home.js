@@ -29,7 +29,7 @@ function Home() {
 	const fetchCurrencyPrice = async (currency, fiat) => {
 		try {
 			const res = await axios.get(
-				`http://localhost:5000/?coinId=${currency}&currency=${fiat.toLowerCase()}`
+				`https://secret-ridge-31484.herokuapp.com/?coinId=${currency}&currency=${fiat.toLowerCase()}`
 			);
 			const data = res.data[currency];
 			console.log(data);
@@ -109,7 +109,6 @@ function Home() {
 										/>
 									</div>
 
-
 									<div>
 										<Select
 											options={countries.map((item) => ({
@@ -160,8 +159,6 @@ function Home() {
 			</div>
 		</>
 	);
-
-
 }
 
 export default Home;
