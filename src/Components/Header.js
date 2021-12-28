@@ -12,7 +12,8 @@ function Header() {
       <Navbar expand="lg">
         <Container>
           <Navbar.Brand href="/" className="logo">
-            Dot calculator
+            {/* Dot calculator */}
+            <img src="./polkacal-logo.svg" width="150" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" className="customNav">
