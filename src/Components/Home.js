@@ -7,33 +7,72 @@ import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+const countriesList = countries.map((item) => ({
+	value: item.currency.code,
+	label: (
+		<>
+			<img
+				className="img_1"
+				width="28px"
+				src={`data:image/png;base64,${item.flag}`}
+				alt=""
+			/>
+			<span>
+				&nbsp;
+				{`${item.currency.code} ${item.currency.name}`}
+			</span>
+		</>
+	),
+	meta: {
+		symbol: item.currency.symbol,
+	},
+}));
+
 const coinOptions = [
 	{
-		value: "polkadot",
+		value: "Polkadot",
 		label: (
 			<>
+				<img className="img_1" width="30px" src="./dot.png" alt="" />
+				&nbsp;
 				<span>Polkadot</span>
 			</>
 		),
+		meta: {
+			symbol: "DOT",
+		},
 	},
-	{ value: "kusama", label: "Kusama" },
+	{
+		value: "Kusama",
+		label: (
+			<>
+				<img className="img_1" width="28px" src="./ksm.png" alt="" />
+				&nbsp;
+				<span>Kusama</span>
+			</>
+		),
+		meta: {
+			symbol: "KSM",
+		},
+	},
+	// { value: "kusama", label: "Kusama" },
 ];
 
 function Home() {
-	const [coinId, setCoinId] = useState("");
+	const [coinId, setCoinId] = useState("1");
 	const [price, setPrice] = useState("");
-	const [selectedCrypto, setSelectedCrypto] = useState("");
-	const [selectedFiat, setSelectedFiat] = useState("usd");
-	console.log("selected crypto", selectedCrypto, selectedFiat);
+	const [selectedCrypto, setSelectedCrypto] = useState(coinOptions[0]);
+	const [selectedFiat, setSelectedFiat] = useState(countriesList[0]);
+	console.log("selected crypto", selectedCrypto, selectedFiat, countriesList);
 
 	const fetchCurrencyPrice = async (currency, fiat) => {
 		try {
 			const res = await axios.get(
-				`https://secret-ridge-31484.herokuapp.com/?coinId=${currency}&currency=${fiat.toLowerCase()}`
+				`https://secret-ridge-31484.herokuapp.com/?coinId=${currency}&currency=${fiat}`
 			);
 			const data = res.data[currency];
-			console.log(data);
-			setPrice(data[fiat.toLowerCase()]);
+			console.log("data fetchcurrencyprice", data, res.data);
+			setPrice(data[fiat]);
 			console.log("called price", data);
 		} catch (e) {
 			console.log(e, e.message);
@@ -43,11 +82,14 @@ function Home() {
 	useEffect(() => {
 		if (
 			selectedCrypto &&
-			selectedCrypto.length &&
+			selectedCrypto.value.length &&
 			selectedFiat &&
-			selectedFiat.length
+			selectedFiat.value.length
 		) {
-			fetchCurrencyPrice(selectedCrypto, selectedFiat);
+			fetchCurrencyPrice(
+				selectedCrypto.value.toLowerCase(),
+				selectedFiat.value.toLowerCase()
+			);
 		}
 	}, [selectedCrypto, selectedFiat]);
 
@@ -84,13 +126,10 @@ function Home() {
 
 									<div>
 										<Select
-											defaultValue={{
-												label: "Kusama",
-												value: 0,
-											}}
+											defaultValue={coinOptions[0]}
 											options={coinOptions}
 											onChange={(item) =>
-												setSelectedCrypto(item.value)
+												setSelectedCrypto(item)
 											}
 										/>
 									</div>
@@ -111,25 +150,29 @@ function Home() {
 
 									<div>
 										<Select
-											options={countries.map((item) => ({
-												value: item.currency.code,
-												label: `${item.currency.code} - ${item.currency.name}`,
-											}))}
-											onChange={(option) =>
-												setSelectedFiat(option.value)
-											}
+											defaultValue={countriesList[0]}
+											options={countriesList}
+											onChange={(item) => {
+												console.log(
+													"set selected fiat",
+													item
+												);
+												setSelectedFiat(item);
+											}}
 										/>
 									</div>
 								</div>
 								<div className="text-center">
 									<span className="currencyDisplay">
-										{coinId} {selectedCrypto} ={" "}
+										{coinId} {selectedCrypto.meta.symbol} =
+										&nbsp;
 										{
-											countries.filter(
+											countriesList.filter(
 												(item) =>
-													item.currency.code ===
-													selectedFiat.toUpperCase()
-											)[0].currency.symbol
+													selectedFiat &&
+													item.value ===
+														selectedFiat.value
+											)[0].meta.symbol
 										}
 										{/* {price} */}
 										{coinId * price || 0}
@@ -138,14 +181,15 @@ function Home() {
 										<small className="text-muted">
 											<br></br>
 											<a>
-												1 {selectedCrypto} =
+												1 {selectedCrypto.meta.symbol} =
+												&nbsp;
 												{
-													countries.filter(
+													countriesList.filter(
 														(item) =>
-															item.currency
-																.code ===
-															selectedFiat.toUpperCase()
-													)[0].currency.symbol
+															selectedFiat.value &&
+															item.value ===
+																selectedFiat.value
+													)[0].meta.symbol
 												}
 												{price}
 											</a>
